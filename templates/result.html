@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Face Privacy - Protection Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        /* ================================
+           RESULT PAGE
+        ================================= */
+
+        .result-page {
+            background: #f4f7fb;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        /* ================================
+           HERO
+        ================================= */
+
+        .result-hero {
+            background: linear-gradient(
+                135deg,
+                #172554,
+                #2563eb,
+                #06b6d4
+            );
+
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        .result-hero h1 {
+            margin: 0;
+            font-size: 34px;
+            font-weight: 700;
+        }
+
+        .result-hero p {
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        /* ================================
+           IMAGE COMPARISON
+        ================================= */
+
+        .image-comparison {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 25px;
+
+            padding: 35px 20px;
+        }
+
+        .result-image-card {
+            background: white;
+            width: 330px;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.08);
+
+            text-align: center;
+        }
+
+        .result-image-card h3 {
+            margin: 5px 0 15px;
+            color: #172554;
+        }
+
+        .result-image-card img {
+            width: 100%;
+            max-height: 430px;
+            object-fit: contain;
+
+            border-radius: 10px;
+        }
+
+        /* ================================
+           MAIN CONTAINER
+        ================================= */
+
+        .result-content {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* ================================
+           SECTION CARD
+        ================================= */
+
+        .result-section {
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 6px 25px rgba(0,0,0,0.06);
+        }
+
+        .result-section-title {
+            text-align: center;
+
+            color: #172554;
+
+            margin-top: 0;
+            margin-bottom: 22px;
+        }
+
+        /* ================================
+           SUMMARY
+        ================================= */
+
+        .result-summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 15px;
+        }
+
+        .result-summary-item {
+
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            text-align: center;
+        }
+
+        .result-summary-item h4 {
+            margin: 0 0 8px;
+
+            font-size: 13px;
+
+            color: #64748b;
+        }
+
+        .result-summary-item p {
+            margin: 0;
+
+            color: #2563eb;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+        /* ================================
+           PIPELINE
+        ================================= */
+
+        .protection-pipeline {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .pipeline-step-new {
+
+            width: 120px;
+            min-height: 90px;
+
+            border: 2px solid #3b82f6;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            background: #f8fbff;
+
+            color: #172554;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .pipeline-icon {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .pipeline-arrow-new {
+            font-size: 22px;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* ================================
+           ANALYSIS GRID
+        ================================= */
+
+        .analysis-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 25px;
+        }
+
+        /* ================================
+           PRIVACY SCORE
+        ================================= */
+
+        .privacy-score-card {
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fafc
+                );
+
+            border-radius: 14px;
+
+            padding: 25px;
+        }
+
+        .privacy-score-number {
+
+            font-size: 48px;
+
+            font-weight: 800;
+
+            color: #2563eb;
+
+            margin: 10px 0;
+        }
+
+        .privacy-status {
+
+            display: inline-block;
+
+            padding: 8px 22px;
+
+            border-radius: 20px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-weight: 600;
+        }
+
+        .privacy-explanation {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-top: 15px;
+        }
+
+        /* ================================
+           AI RECOMMENDATION
+        ================================= */
+
+        .recommendation-card {
+
+            background: #eef4ff;
+
+            border-left: 5px solid #2563eb;
+
+            border-radius: 14px;
+
+            padding: 25px;
+        }
+
+        .recommendation-card h3 {
+
+            margin-top: 0;
+
+            color: #172554;
+
+        }
+
+        .recommendation-mode {
+
+            display: inline-block;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 9px 18px;
+
+            border-radius: 20px;
+
+            font-weight: 600;
+
+            margin-bottom: 12px;
+
+        }
+
+        .recommendation-card p {
+
+            color: #334155;
+
+            line-height: 1.6;
+
+        }
+
+        /* ================================
+           PROTECTION METHODS
+        ================================= */
+
+        .methods-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+        }
+
+        .method-item {
+
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 10px;
+
+            padding: 13px 16px;
+
+            color: #334155;
+
+        }
+
+        .method-active {
+
+            border-left: 4px solid #22c55e;
+
+        }
+
+        .method-inactive {
+
+            border-left: 4px solid #cbd5e1;
+
+            color: #94a3b8;
+
+        }
+
+        /* ================================
+           DOWNLOAD
+        ================================= */
+
+        .download-section {
+
+            text-align: center;
+
+            padding: 20px;
+        }
+
+        .download-btn {
+
+            display: inline-block;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 14px 30px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .download-btn:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+        }
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media (max-width: 900px) {
+
+            .result-summary-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .analysis-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .image-comparison {
+
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+            .result-image-card {
+
+                width: 90%;
+            }
+
+            .result-summary-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .methods-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav>
+
+    <div class="logo">
+        AI Face Privacy
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="/">Home</a>
+        </li>
+
+        <li>
+            <a href="/upload">Upload</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<div class="result-page">
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="result-hero">
+
+    <h1>
+        Protection Result
+    </h1>
+
+    <p>
+        Your image has been processed by the AI privacy protection system.
+    </p>
+
+</section>
+
+
+<div class="result-content">
+
+
+<!-- =========================================
+     ORIGINAL / PROTECTED IMAGE
+========================================= -->
+
+<div class="image-comparison">
+
+    <div class="result-image-card">
+
+        <h3>
+            Original Image
+        </h3>
+
+        <img
+            src="{{ original_image }}"
+            alt="Original Image">
+
+    </div>
+
+
+    <div class="result-image-card">
+
+        <h3>
+            Protected Image
+        </h3>
+
+        <img
+            src="{{ protected_image }}"
+            alt="Protected Image">
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     PROTECTION SUMMARY
+========================================= -->
+
+<section class="result-section">
+
+    <h2 class="result-section-title">
+        📊 Protection Summary
+    </h2>
+
+
+    <div class="result-summary-grid">
+
+
+        <div class="result-summary-item">
+
+            <h4>
+                Protection Mode
+            </h4>
+
+            <p>
+                {{ privacy_mode.replace('_',' ').title() }}
+            </p>
+
+        </div>
+
+
+        <div class="result-summary-item">
+
+            <h4>
+                Protection Level
+            </h4>
+
+            <p>
+                {{ protection_level }}
+            </p>
+
+        </div>
+
+
+        <div class="result-summary-item">
+
+            <h4>
+                Faces Protected
+            </h4>
+
+            <p>
+                {{ faces_detected }}
+            </p>
+
+        </div>
+
+
+        <div class="result-summary-item">
+
+            <h4>
+                Landmarks Protected
+            </h4>
+
+            <p>
+                {{ landmarks }}
+            </p>
+
+        </div>
+
+
+        <div class="result-summary-item">
+
+            <h4>
+                Processing Time
+            </h4>
+
+            <p>
+                {{ processing_time }} sec
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     AI PIPELINE
+========================================= -->
+
+<section class="result-section">
+
+    <h2 class="result-section-title">
+        ⚙️ AI Protection Pipeline
+    </h2>
+
+
+    <div class="protection-pipeline">
+
+
+        <div class="pipeline-step-new">
+
+            <div class="pipeline-icon">
+                📤
+            </div>
+
+            Image Uploaded
+
+        </div>
+
+
+        <div class="pipeline-arrow-new">
+            →
+        </div>
+
+
+        <div class="pipeline-step-new">
+
+            <div class="pipeline-icon">
+                👁️
+            </div>
+
+            Face Detection
+
+        </div>
+
+
+        <div class="pipeline-arrow-new">
+            →
+        </div>
+
+
+        <div class="pipeline-step-new">
+
+            <div class="pipeline-icon">
+                📍
+            </div>
+
+            Landmark Analysis
+
+        </div>
+
+
+        {% if privacy_mode != "natural" %}
+
+
+        <div class="pipeline-arrow-new">
+            →
+        </div>
+
+
+        <div class="pipeline-step-new">
+
+            <div class="pipeline-icon">
+                🎨
+            </div>
+
+            Texture Protection
+
+        </div>
+
+
+        <div class="pipeline-arrow-new">
+            →
+        </div>
+
+
+        <div class="pipeline-step-new">
+
+            <div class="pipeline-icon">
+                🌀
+            </div>
+
+            Identity Transformation
+
+        </div>
+
+
+        {% endif %}
+
+
+        <div class="pipeline-arrow-new">
+            →
+        </div>
+
+
+        <div class="pipeline-step-new">
+
+            <div class="pipeline-icon">
+                🛡️
+            </div>
+
+            Protected Image
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     PRIVACY ANALYSIS + AI RECOMMENDATION
+========================================= -->
+
+<div class="analysis-grid">
+
+
+<!-- PRIVACY SCORE -->
+
+<section class="result-section">
+
+    <div class="privacy-score-card">
+
+        <h2>
+            🛡 Privacy Protection Score
+        </h2>
+
+
+        <div class="privacy-score-number">
+
+            {{ "%.2f"|format(privacy_score) }}%
+
+        </div>
+
+
+        {% if privacy_score >= 70 %}
+
+            <div class="privacy-status">
+                Strong Protection
+            </div>
+
+        {% elif privacy_score >= 50 %}
+
+            <div class="privacy-status">
+                Moderate Protection
+            </div>
+
+        {% else %}
+
+            <div class="privacy-status">
+                Basic Protection
+            </div>
+
+        {% endif %}
+
+
+        <p class="privacy-explanation">
+
+            This score represents the level of privacy protection
+            achieved by the selected protection strategy.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- AI RECOMMENDATION -->
+
+<section class="result-section">
+
+    <div class="recommendation-card">
+
+        <h3>
+            🤖 AI Recommendation
+        </h3>
+
+
+        <div class="recommendation-mode">
+
+            {% if privacy_mode == "natural" %}
+
+                Low Protection
+
+            {% elif privacy_mode == "balanced" %}
+
+                Medium Protection
+
+            {% elif privacy_mode == "strong" %}
+
+                High Protection
+
+            {% else %}
+
+                Maximum Protection
+
+            {% endif %}
+
+        </div>
+
+
+        {% if privacy_mode == "natural" %}
+
+            <p>
+                This mode prioritizes natural appearance while
+                applying basic identity protection.
+            </p>
+
+        {% elif privacy_mode == "balanced" %}
+
+            <p>
+                Medium Protection is recommended for most users
+                because it provides an effective balance between
+                identity protection and natural visual quality.
+            </p>
+
+        {% elif privacy_mode == "strong" %}
+
+            <p>
+                High Protection provides stronger identity
+                protection while maintaining reasonable visual quality.
+            </p>
+
+        {% else %}
+
+            <p>
+                Maximum Protection applies the strongest available
+                privacy transformations for users who prioritize
+                identity protection.
+            </p>
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- =========================================
+     PROTECTION METHODS
+========================================= -->
+
+<section class="result-section">
+
+    <h2 class="result-section-title">
+        🧠 Protection Methods Applied
+    </h2>
+
+
+    <div class="methods-grid">
+
+
+        {% if privacy_mode == "natural" %}
+
+            <div class="method-item method-active">
+                ✅ Landmark Protection
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Gentle Landmark Warping
+            </div>
+
+            <div class="method-item method-inactive">
+                — Texture Protection
+            </div>
+
+            <div class="method-item method-inactive">
+                — Identity Transformation
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Identity Texture Transform
+            </div>
+
+            <div class="method-item method-inactive">
+                — Adaptive Blur
+            </div>
+
+
+        {% elif privacy_mode == "balanced" %}
+
+            <div class="method-item method-active">
+                ✅ Landmark Protection
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Texture Protection
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Elastic Identity Transform
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Identity Texture Transform
+            </div>
+
+            <div class="method-item method-inactive">
+                — Adaptive Blur
+            </div>
+
+
+        {% elif privacy_mode == "strong" %}
+
+            <div class="method-item method-active">
+                ✅ Landmark Protection
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Texture Protection
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Elastic Identity Transform
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Identity Texture Transform
+            </div>
+
+            <div class="method-item method-inactive">
+                — Adaptive Blur
+            </div>
+
+
+        {% else %}
+
+            <div class="method-item method-active">
+                ✅ Landmark Protection
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Texture Protection
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Elastic Identity Transform
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Identity Texture Transform
+            </div>
+
+            <div class="method-item method-active">
+                ✅ Adaptive Blur
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     DOWNLOAD
+========================================= -->
+
+<section class="download-section">
+
+    <a
+        href="{{ protected_image }}"
+        download
+        class="download-btn">
+
+        🛡️ Download Protected Image
+
+    </a>
+
+</section>
+
+
+</div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,424 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FaceShield AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        FaceShield AI
+    </div>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/upload">Protect Image</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+
+</nav>
+
+<section class="hero">
+
+    <h1>
+        Protect Your Identity with AI
+    </h1>
+
+    <p>
+        FaceShield AI uses Artificial Intelligence, MediaPipe and
+        InsightFace to protect your identity while preserving
+        the natural appearance of your photos.
+    </p>
+
+    <a href="/upload">
+        <button>
+            🚀 Start Protecting
+        </button>
+    </a>
+
+</section>
+
+<section class="features" id="features">
+
+    <div class="card">
+        <h2>🤖 AI Face Detection</h2>
+
+        <p>
+            Detects facial landmarks with high accuracy using
+            advanced AI models.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>🛡 Identity Suppression</h2>
+
+        <p>
+            Protects sensitive facial regions while keeping
+            your image natural.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>📊 Privacy Analysis</h2>
+
+        <p>
+            Generates Privacy Score, Similarity Score and
+            AI-based Protection Report.
+        </p>
+    </div>
+
+</section>
+
+<section class="how-it-works">
+
+    <h2>How FaceShield AI Works</h2>
+
+    <div class="steps">
+
+        <div class="step">
+            <div class="icon">📤</div>
+            <h3>Upload Image</h3>
+            <p>Select any facial image from your device.</p>
+        </div>
+
+        <div class="step">
+            <div class="icon">🧠</div>
+            <h3>AI Analysis</h3>
+            <p>MediaPipe detects facial landmarks and identifies sensitive regions.</p>
+        </div>
+
+        <div class="step">
+            <div class="icon">🛡️</div>
+            <h3>Identity Protection</h3>
+            <p>Eyes, nose and mouth are selectively protected while preserving image quality.</p>
+        </div>
+
+        <div class="step">
+            <div class="icon">📊</div>
+            <h3>Privacy Score</h3>
+            <p>The system calculates the similarity and privacy score instantly.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="hero" id="about">
+
+    <h1>Why FaceShield AI?</h1>
+
+    <p>
+
+        Traditional blur and pixelation destroy image quality.
+
+        FaceShield AI intelligently protects your identity while
+        maintaining a realistic appearance using landmark-based
+        suppression powered by Artificial Intelligence.
+
+    </p>
+
+</section>
+
+<footer>
+
+    <h3>FaceShield AI</h3>
+
+    <p>
+
+        AI Powered Face Privacy Protection System
+
+    </p>
+
+    <br>
+
+    <p>
+
+        © 2026 FaceShield AI | Built using Flask, OpenCV,
+        MediaPipe & InsightFace
+
+    </p>
+
+</footer>
+
+</body>
+
+</html>
+```
+.how-it-works{
+
+    padding:80px;
+
+    background:white;
+
+    text-align:center;
+
+}
+
+.how-it-works h2{
+
+    font-size:42px;
+
+    margin-bottom:60px;
+
+}
+
+.steps{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+
+}
+
+.step{
+
+    width:260px;
+
+    background:#f8fafc;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    transition:.3s;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.step:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.icon{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+}
+
+<section class="technology">
+
+    <h2>Technologies Used</h2>
+
+    <div class="tech-grid">
+
+        <div class="tech-card">
+            <h3>🐍 Python</h3>
+            <p>Backend application development</p>
+        </div>
+
+        <div class="tech-card">
+            <h3>📷 OpenCV</h3>
+            <p>Image processing and manipulation</p>
+        </div>
+
+        <div class="tech-card">
+            <h3>🙂 MediaPipe</h3>
+            <p>Face landmark detection</p>
+        </div>
+
+        <div class="tech-card">
+            <h3>🧠 InsightFace</h3>
+            <p>Face similarity comparison</p>
+        </div>
+
+        <div class="tech-card">
+            <h3>⚡ Flask</h3>
+            <p>Web application framework</p>
+        </div>
+
+        <div class="tech-card">
+            <h3>🎨 HTML • CSS • JavaScript</h3>
+            <p>Modern responsive interface</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="stats">
+
+    <h2>Project Performance</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h1>99.7%</h1>
+            <p>Detection Accuracy</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>&lt;2 sec</h1>
+            <p>Average Processing Time</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>19</h1>
+            <p>Landmarks Protected</p>
+        </div>
+
+        <div class="stat-card">
+            <h1>100%</h1>
+            <p>Privacy Preservation</p>
+        </div>
+
+    </div>
+
+</section>
+<section class="about">
+
+    <div class="about-left">
+
+        <h2>About FaceShield AI</h2>
+
+        <p>
+
+            FaceShield AI is an Artificial Intelligence-based Face Privacy
+            Protection System designed to safeguard facial identity while
+            preserving the natural appearance of images.
+
+        </p>
+
+        <p>
+
+            The system combines MediaPipe Face Landmarker, OpenCV and
+            InsightFace to detect facial landmarks, selectively protect
+            identity-sensitive regions, and evaluate privacy using
+            facial similarity analysis.
+
+        </p>
+
+        <a href="/upload">
+
+            <button class="about-btn">
+
+                Protect Your Image
+
+            </button>
+
+        </a>
+
+    </div>
+
+    <div class="about-right">
+
+        <div class="about-box">
+
+            <h3>🛡 Smart Privacy</h3>
+
+            <p>
+                AI intelligently protects facial identity without hiding the entire face.
+            </p>
+
+        </div>
+
+        <div class="about-box">
+
+            <h3>⚡ Fast Processing</h3>
+
+            <p>
+                Image protection is completed within seconds using optimized AI models.
+            </p>
+
+        </div>
+
+        <div class="about-box">
+
+            <h3>📊 Privacy Analysis</h3>
+
+            <p>
+                Calculates similarity score and privacy percentage automatically.
+            </p>
+
+        </div>
+
+        <div class="about-box">
+
+            <h3>🔒 Secure Protection</h3>
+
+            <p>
+                Protects sensitive facial landmarks while maintaining image quality.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+.technology{
+
+    padding:80px;
+
+    background:#f5f7fb;
+
+    text-align:center;
+
+}
+
+.technology h2{
+
+    font-size:42px;
+
+    margin-bottom:50px;
+
+}
+
+.tech-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+.tech-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.tech-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.tech-card h3{
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}

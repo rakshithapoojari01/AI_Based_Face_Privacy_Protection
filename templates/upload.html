@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Image</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        FaceShield AI
+    </div>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/upload">Upload</a></li>
+    </ul>
+
+</nav>
+
+<section class="hero">
+
+    <div class="hero-badge">
+        🛡 AI-Powered Face Privacy Protection
+    </div>
+
+    <h1>Protect Your Digital Identity</h1>
+
+    <p>
+        FaceShield AI intelligently protects facial identity while preserving a natural appearance using selective landmark transformation and AI-driven privacy enhancement.
+    </p>
+
+    <div class="hero-features">
+
+        <span>⚡ Fast Processing</span>
+
+        <span>🛡 Local Processing</span>
+
+        <span>😊 Natural Appearance</span>
+
+    </div>
+
+</section>
+
+<div class="upload-container">
+
+    <form id="uploadForm"
+          action="/process"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <div class="upload-card">
+
+            <label for="imageInput" class="upload-box">
+
+            <div class="upload-icon">
+    🖼️
+</div>
+
+<h2>Drop Your Image Here</h2>
+
+<p>
+    Drag & Drop or Click to Browse
+</p>
+
+                <input
+                    type="file"
+                    name="image"
+                    id="imageInput"
+                    accept=".jpg,.jpeg,.png"
+                    hidden
+                    required>
+
+                <img
+                    id="preview"
+                    src=""
+                    style="display:none;
+                           width:300px;
+                           margin-top:20px;
+                           border-radius:15px;">
+
+            </label>
+
+            <br>
+<div class="privacy-section">
+
+    <label for="privacy_mode">
+        <b>Select Privacy Level</b>
+    </label>
+
+    <br><br>
+
+    <select
+        name="privacy_mode"
+        id="privacy_mode"
+        class="privacy-select">
+    <option value="natural">
+🟢 Low Protection
+</option>
+
+<option value="balanced" selected>
+🟡 Medium Protection 
+</option>
+
+<option value="strong">
+🟠 High Protection
+</option>
+
+<option value="maximum">
+🔴 Maximum Protection
+</option>
+
+    </select>
+
+    <div class="privacy-card">
+
+        <h3>Privacy Experience</h3>
+
+        <div class="emoji-row">
+
+        <span>🟢</span>
+
+        <span>🟡</span>
+
+        <span>🟠</span>
+
+        <span>🔴</span>
+
+        </div>
+
+        <input
+            type="range"
+            id="privacySlider"
+            min="0"
+            max="3"
+            step="1"
+            value="1">
+
+        <div id="modeBadge" class="mode-badge balanced">
+
+            ⚖️ Balanced Protection
+
+        </div>
+
+        <p id="modeDescription">
+
+            Best balance between privacy and image quality.
+
+        </p>
+
+    </div>
+    <div class="recommend-card">
+
+    <h3>🤖 AI Recommendation</h3>
+
+    <p>
+
+        <b>Recommended Mode: Medium Protection</b>
+
+        <br><br>
+
+        Designed to deliver strong identity protection while maintaining a natural appearance. This mode is recommended for everyday use and offers the best balance between privacy and image quality.
+
+    </p>
+
+</div>
+</div>
+
+<button type="submit" class="upload-btn">
+    🛡 🛡 Generate Protected Image
+</button>
+
+            <div id="loading"
+                 style="display:none;
+                        margin-top:25px;
+                        text-align:center;">
+
+                <h3>🔄 Protecting Face...</h3>
+
+                <p>Please wait while AI protects your identity.</p>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+<div class="feature-section">
+
+<div class="feature">
+
+⚡
+
+<h4>Fast</h4>
+
+<p>Average processing time under 2 seconds.</p>
+
+</div>
+
+<div class="feature">
+
+🛡
+
+<h4>Privacy Protection</h4>
+
+<p>Selective facial landmark transformation.</p>
+
+</div>
+
+<div class="feature">
+
+😊
+
+<h4>Natural Appearance</h4>
+
+<p>Preserves realistic visual quality.</p>
+
+</div>
+
+<div class="feature">
+
+📥
+
+<h4>Download Ready</h4>
+
+<p>Protected image available instantly.</p>
+
+</div>
+
+</div>
+
+<script>
+   
+const input = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+
+// ------------------------
+// Image Preview
+// ------------------------
+
+input.addEventListener("change", function () {
+
+    if (this.files && this.files[0]) {
+
+        preview.src = URL.createObjectURL(this.files[0]);
+        preview.style.display = "block";
+
+    }
+
+});
+
+// ------------------------
+// Loading Animation
+// ------------------------
+
+document.getElementById("uploadForm").addEventListener("submit", function () {
+
+    document.getElementById("loading").style.display = "block";
+
+});
+
+// ------------------------
+// Privacy Slider
+// ------------------------
+
+const slider = document.getElementById("privacySlider");
+const dropdown = document.getElementById("privacy_mode");
+const badge = document.getElementById("modeBadge");
+const description = document.getElementById("modeDescription");
+const modes = [
+
+{
+value:"natural",
+title:"🟢 Low Protection",
+desc:"Suitable when preserving natural appearance is the priority.",
+className:"natural"
+},
+
+{
+value:"balanced",
+title:"🟡 Medium Protection",
+desc:"Recommended for most users.",
+className:"balanced"
+},
+
+{
+value:"strong",
+title:"🟠 High Protection",
+desc:"Provides stronger identity protection.",
+className:"strong"
+},
+
+{
+value:"maximum",
+title:"🔴 Maximum Protection",
+desc:"Highest available privacy protection.",
+className:"maximum"
+}
+
+];
+function updateMode(index){
+
+    dropdown.value = modes[index].value;
+
+    badge.innerHTML = modes[index].title;
+
+    description.innerHTML = modes[index].desc;
+
+    badge.className = "mode-badge " + modes[index].className;
+
+}
+
+// Slider → Dropdown
+
+slider.addEventListener("input", function(){
+
+    updateMode(this.value);
+
+});
+
+// Dropdown → Slider
+
+dropdown.addEventListener("change", function(){
+
+    let index = modes.findIndex(
+        m => m.value === this.value
+    );
+
+    slider.value = index;
+
+    updateMode(index);
+
+});
+
+// Default
+
+updateMode(1);
+
+</script>
+
+</body>
+
+</html>
