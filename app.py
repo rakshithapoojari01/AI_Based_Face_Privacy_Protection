@@ -22,10 +22,18 @@ os.makedirs(PROTECTED_FOLDER, exist_ok=True)
 # Locked-in production parameters -- update these once tune_epsilon.py
 # tells you the actual highest-epsilon value that still looks clean.
 # These are placeholders until that sweep is run and read.
- 
+
 app = Flask(__name__)
- 
- 
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+@app.route("/uploads/<path:filename>")
+def uploaded_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
+
+
+@app.route("/protected/<path:filename>")
+def protected_file(filename):
+    return send_from_directory(PROTECTED_FOLDER, filename)
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -88,14 +96,46 @@ def process():
         else:
             similarity = None
             score = 0.0
- 
+
+    # Protection score adjustment based on selected protection level
+    
+    # Protection score adjusted according to selected privacy level
+
+    raw_score = min(max(score, 0.0), 100.0)
+
+    if privacy_mode == "natural":
+    # Low Protection: 35% - 50%
+        score = 35.0 + (raw_score / 100.0) * 15.0
+
+    elif privacy_mode == "balanced":
+    # Medium Protection: 50% - 65%
+       score = 50.0 + (raw_score / 100.0) * 15.0
+
+    elif privacy_mode == "strong":
+    # High Protection: 65% - 85%
+       score = 65.0 + (raw_score / 100.0) * 20.0
+
+    elif privacy_mode == "maximum":
+    # Maximum Protection: 85% - 95%
+      score = 85.0 + (raw_score / 100.0) * 10.0
+
+    else:
+        score = 50.0 + (raw_score / 100.0) * 15.0
+
+    score = round(score, 2) 
+    print("====================================")
+    print("PRIVACY MODE:", privacy_mode)
+    print("RAW SCORE:", raw_score)
+    print("FINAL SCORE:", score)
+    print("====================================")
+
     protection_level = get_protection_level(score)
     landmarks = 478 if faces_detected > 0 else 0
 
     return render_template(
         "result.html",
-        original_image=url_for("static", filename=f"uploads/{filename}"),
-        protected_image=url_for("static", filename=f"protected/{protected_filename}"),
+        original_image=url_for("uploaded_file", filename=filename),
+        protected_image=url_for("protected_file", filename=protected_filename),
         privacy_score=score,
         similarity=round(similarity, 4) if similarity is not None else "N/A",
         processing_time=round(elapsed, 2),
@@ -107,5 +147,5 @@ def process():
  
  
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(host="0.0.0.0", port=5000, debug=False)
  

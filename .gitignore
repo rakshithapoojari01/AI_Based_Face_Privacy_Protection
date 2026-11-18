@@ -216,3 +216,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+venv/
+venv311/
+__pycache__/
+*.pyc
+.env
+static/uploads/
+static/protected/
+image/
+image_jpg/
+protected_v2.jpg
+whitebox_test_output.jpg
+report.zip
+requirements_old.txt
+models/GFPGANv1.4.pth

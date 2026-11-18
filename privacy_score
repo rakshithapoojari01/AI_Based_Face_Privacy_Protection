@@ -1,0 +1,20 @@
+def calculate_privacy_score(similarity, landmarks=19):
+    """
+    Composite Privacy Score
+
+    Combines:
+    - Identity similarity
+    - Number of protected landmarks
+    """
+
+    similarity = max(-1.0, min(1.0, similarity))
+
+    similarity_component = (1 - similarity) * 50
+    landmark_component = (landmarks / 19) * 40
+    base_score = 10
+
+    privacy = similarity_component + landmark_component + base_score
+
+    privacy = min(100, privacy)
+
+    return round(privacy, 2)

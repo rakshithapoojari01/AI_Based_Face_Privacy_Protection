@@ -6,348 +6,2060 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Upload Image</title>
+    <title>FaceShield AI | Protect Your Image</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8ff;
+            color: #0b1f44;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .fs-navbar {
+            height: 64px;
+            background: #071a38;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            color: white;
+        }
+
+        .fs-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fs-logo-icon {
+            width: 36px;
+            height: 42px;
+            background: linear-gradient(145deg, #087cff, #16c4f5);
+
+            clip-path: polygon(
+                50% 0%,
+                92% 13%,
+                88% 68%,
+                50% 100%,
+                12% 68%,
+                8% 13%
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 19px;
+        }
+
+        .fs-logo-text {
+            font-size: 25px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .fs-logo-text span {
+            color: #18bdf2;
+        }
+
+        .fs-tagline {
+            font-size: 9px;
+            color: #a9bddb;
+            margin-top: 2px;
+        }
+
+        .fs-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .fs-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .fs-nav-links a:hover {
+            color: #20c4f5;
+        }
+
+        .fs-nav-active {
+            border-bottom: 3px solid #19c4f4;
+            padding-bottom: 8px;
+        }
+
+        .fs-nav-button {
+            background: linear-gradient(90deg, #147cff, #12bde9);
+            padding: 12px 21px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 132, 255, 0.3);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .fs-hero {
+            min-height: 265px;
+
+            background:
+                radial-gradient(
+                    circle at 82% 50%,
+                    rgba(24, 183, 255, 0.25),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    115deg,
+                    #06356f,
+                    #0875d5 55%,
+                    #087bbd
+                );
+
+            color: white;
+
+            padding: 42px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            overflow: hidden;
+        }
+
+        .fs-hero-content {
+            max-width: 650px;
+        }
+
+        .fs-hero-small {
+            color: #39d1f5;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 13px;
+        }
+
+        .fs-hero h1 {
+            font-size: 45px;
+            line-height: 1.08;
+            font-weight: 850;
+            margin-bottom: 14px;
+        }
+
+        .fs-hero p {
+            font-size: 17px;
+            line-height: 1.55;
+            color: #e4f1ff;
+            max-width: 620px;
+        }
+
+        .fs-hero-features {
+            display: flex;
+            gap: 30px;
+            margin-top: 22px;
+        }
+
+        .fs-hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .fs-feature-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.3);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           HERO IMAGE
+        ===================================================== */
+
+        .fs-hero-visual {
+            width: 310px;
+            height: 190px;
+            position: relative;
+            margin-right: 3%;
+        }
+
+        .fs-hero-image {
+            width: 225px;
+            height: 180px;
+
+            object-fit: cover;
+
+            border-radius: 20px;
+
+            border: 1px solid rgba(100,220,255,0.8);
+
+            box-shadow:
+                0 0 35px rgba(0,190,255,0.35);
+
+            position: absolute;
+
+            right: 30px;
+            top: 5px;
+        }
+
+        .fs-protection-label {
+            position: absolute;
+
+            right: -5px;
+            bottom: 20px;
+
+            background: #087cff;
+            color: white;
+
+            padding: 14px 20px;
+
+            border-radius: 14px;
+
+            font-weight: 700;
+            font-size: 14px;
+
+            box-shadow:
+                0 8px 25px rgba(0,90,255,0.4);
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+        ===================================================== */
+
+        .fs-main {
+            max-width: 1180px;
+            margin: 25px auto 50px;
+            padding: 0 20px;
+        }
+
+
+        /* =====================================================
+           STEP CARD
+        ===================================================== */
+
+        .fs-step {
+            background: white;
+
+            border-radius: 18px;
+
+            margin-bottom: 18px;
+
+            padding: 22px;
+
+            border: 1px solid #e0eaff;
+
+            box-shadow:
+                0 8px 30px rgba(18, 58, 110, 0.08);
+
+            position: relative;
+        }
+
+        .fs-step-header {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .fs-step-number {
+            min-width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #087cff,
+                    #16bdf0
+                );
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+            font-weight: 800;
+
+            box-shadow:
+                0 5px 15px rgba(0,120,255,0.25);
+        }
+
+        .fs-step-title h2 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .fs-step-title p {
+            color: #6680a8;
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           STEP 1
+        ===================================================== */
+
+        .fs-file-info {
+            margin-left: auto;
+
+            background: #f0f5ff;
+
+            color: #58729a;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .fs-upload-box {
+            min-height: 180px;
+
+            border: 2px dashed #67b7ff;
+
+            border-radius: 14px;
+
+            background: #fafdff;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            padding: 20px;
+        }
+
+        .fs-upload-box:hover {
+            border-color: #087cff;
+            background: #f2f9ff;
+        }
+
+        .fs-upload-icon {
+            width: 55px;
+            height: 55px;
+
+            border-radius: 50%;
+
+            background: #e8f4ff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #087cff;
+
+            font-size: 29px;
+
+            margin-bottom: 10px;
+        }
+
+        .fs-upload-box h3 {
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .fs-upload-box p {
+            color: #7185a3;
+            font-size: 12px;
+            margin-bottom: 13px;
+        }
+
+        .fs-choose-button {
+            background: #087cff;
+
+            color: white;
+
+            padding: 11px 25px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+        #preview {
+            max-width: 260px;
+            max-height: 150px;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+
+            margin-top: 10px;
+        }
+
+
+        /* =====================================================
+           STEP 2
+        ===================================================== */
+
+        .fs-privacy-layout {
+            display: grid;
+
+            grid-template-columns:
+                1.45fr
+                0.85fr;
+
+            gap: 20px;
+
+            align-items: stretch;
+        }
+
+        .fs-privacy-panel {
+            background: #fbfdff;
+
+            border: 1px solid #edf2fa;
+
+            border-radius: 14px;
+
+            padding: 20px 25px;
+        }
+
+        .fs-privacy-title {
+            text-align: center;
+
+            font-size: 15px;
+            font-weight: 800;
+
+            margin-bottom: 22px;
+        }
+
+        .fs-slider-area {
+            position: relative;
+
+            padding: 0 35px;
+        }
+
+        .fs-slider {
+            width: 100%;
+
+            accent-color: #315de8;
+
+            cursor: pointer;
+        }
+
+        .fs-levels {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 8px;
+        }
+
+        .fs-level {
+            text-align: center;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #173258;
+        }
+
+        .fs-level span {
+            display: block;
+
+            font-weight: 400;
+
+            color: #7085a5;
+
+            margin-top: 3px;
+        }
+
+        .fs-level-dot {
+            width: 21px;
+            height: 21px;
+
+            border-radius: 50%;
+
+            margin: 0 auto 8px;
+        }
+
+        .fs-low {
+            background: #1fc78b;
+        }
+
+        .fs-medium {
+            background: #f6bb32;
+        }
+
+        .fs-high {
+            background: #ff7544;
+        }
+
+        .fs-max {
+            background: #dc3155;
+        }
+
+        .fs-mode-badge {
+            width: fit-content;
+
+            margin: 18px auto 7px;
+
+            background: #2169eb;
+
+            color: white;
+
+            border-radius: 25px;
+
+            padding: 10px 20px;
+
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .fs-mode-description {
+            text-align: center;
+
+            color: #7184a3;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        .fs-select {
+            width: 100%;
+
+            margin-top: 17px;
+
+            padding: 11px 14px;
+
+            border-radius: 10px;
+
+            border: 1px solid #cbd9ed;
+
+            background: white;
+
+            color: #172d50;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           AI RECOMMENDATION
+        ===================================================== */
+
+        .fs-recommendation {
+            background:
+                linear-gradient(
+                    135deg,
+                    #edf6ff,
+                    #e6f1ff
+                );
+
+            border-left: 4px solid #087cff;
+
+            border-radius: 13px;
+
+            padding: 19px;
+        }
+
+        .fs-recommendation h3 {
+            color: #0870e9;
+
+            font-size: 15px;
+
+            margin-bottom: 12px;
+        }
+
+        .fs-recommendation strong {
+            font-size: 13px;
+        }
+
+        .fs-recommendation p {
+            color: #4d6688;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            margin-top: 9px;
+        }
+
+
+        /* =====================================================
+           STEP 3
+        ===================================================== */
+
+        .fs-generate-content {
+            text-align: center;
+
+            padding: 10px 0 4px;
+        }
+
+        .fs-generate-button {
+            width: min(500px, 90%);
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #087cff,
+                    #0877f0
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 22px rgba(0,120,255,0.25);
+
+            transition: 0.2s;
+        }
+
+        .fs-generate-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 11px 28px rgba(0,120,255,0.35);
+        }
+
+        .fs-local-note {
+            margin-top: 12px;
+
+            color: #7184a3;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           STEP 4 - SIDE BY SIDE
+        ===================================================== */
+
+        .fs-example-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px;
+
+            width: 100%;
+        }
+
+        .fs-example-card {
+            position: relative;
+
+            background: #f8fbff;
+
+            border: 1px solid #dce7f5;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 18px rgba(20,70,130,0.07);
+        }
+
+        .fs-example-image {
+            width: 100%;
+
+            height: 220px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .fs-example-label {
+            position: absolute;
+
+            left: 12px;
+
+            bottom: 12px;
+
+            padding: 7px 13px;
+
+            border-radius: 8px;
+
+            background: #10274c;
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .fs-example-label.protected {
+            background: #087cff;
+        }
+
+
+        /* NOTE BELOW BOTH IMAGES */
+
+        .fs-example-note {
+            margin-top: 18px;
+
+            background: #fff7e6;
+
+            border-radius: 13px;
+
+            padding: 15px 18px;
+
+            color: #6f5b32;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            border: 1px solid #f5e7c6;
+        }
+
+        .fs-example-note strong {
+            color: #423718;
+
+            display: block;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =====================================================
+           PRIVACY STRIP
+        ===================================================== */
+
+        .fs-privacy-strip {
+            background:
+                linear-gradient(
+                    90deg,
+                    #e8f5ff,
+                    #ddecff
+                );
+
+            border-radius: 14px;
+
+            padding: 17px 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 20px;
+
+            border: 1px solid #d7e8fb;
+        }
+
+        .fs-privacy-left {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+        .fs-lock {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #d1e8ff;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+        .fs-privacy-strip h3 {
+            font-size: 14px;
+
+            margin-bottom: 4px;
+        }
+
+        .fs-privacy-strip p {
+            font-size: 11px;
+
+            color: #5f7697;
+        }
+
+        .fs-private-badge {
+            color: #46648b;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           BOTTOM FEATURES
+        ===================================================== */
+
+        .fs-bottom-features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            margin-top: 18px;
+
+            background: white;
+
+            border-radius: 14px;
+
+            border: 1px solid #e4ebf5;
+        }
+
+        .fs-bottom-feature {
+            padding: 18px 20px;
+
+            border-right:
+                1px solid #e0e8f4;
+        }
+
+        .fs-bottom-feature:last-child {
+            border-right: none;
+        }
+
+        .fs-bottom-icon {
+            font-size: 23px;
+
+            margin-bottom: 7px;
+        }
+
+        .fs-bottom-feature h4 {
+            font-size: 12px;
+
+            margin-bottom: 4px;
+        }
+
+        .fs-bottom-feature p {
+            font-size: 10px;
+
+            color: #7085a3;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        #loading {
+            display: none;
+
+            text-align: center;
+
+            padding: 15px;
+        }
+
+        #loading h3 {
+            color: #087cff;
+
+            margin-bottom: 5px;
+        }
+
+        #loading p {
+            color: #7184a3;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .fs-nav-links {
+                gap: 12px;
+            }
+
+            .fs-nav-button {
+                display: none;
+            }
+
+            .fs-hero {
+                padding: 35px 5%;
+            }
+
+            .fs-hero-visual {
+                display: none;
+            }
+
+            .fs-privacy-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .fs-bottom-features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .fs-bottom-feature:nth-child(2) {
+                border-right: none;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .fs-example-row {
+                grid-template-columns: 1fr;
+            }
+
+            .fs-example-image {
+                height: 210px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .fs-navbar {
+                padding: 0 18px;
+            }
+
+            .fs-nav-links a:nth-child(2),
+            .fs-nav-links a:nth-child(3),
+            .fs-nav-links a:nth-child(4) {
+                display: none;
+            }
+
+            .fs-hero h1 {
+                font-size: 34px;
+            }
+
+            .fs-hero p {
+                font-size: 14px;
+            }
+
+            .fs-hero-features {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            .fs-main {
+                padding: 0 12px;
+            }
+
+            .fs-step {
+                padding: 16px;
+            }
+
+            .fs-file-info {
+                display: none;
+            }
+
+            .fs-bottom-features {
+                grid-template-columns: 1fr;
+            }
+
+            .fs-bottom-feature {
+                border-right: none;
+
+                border-bottom:
+                    1px solid #e0e8f4;
+            }
+
+            .fs-privacy-strip {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<nav>
 
-    <div class="logo">
-        FaceShield AI
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="fs-navbar">
+
+    <div class="fs-logo">
+
+        <div class="fs-logo-icon">
+            🛡
+        </div>
+
+        <div>
+
+            <div class="fs-logo-text">
+                FaceShield <span>AI</span>
+            </div>
+
+            <div class="fs-tagline">
+                Privacy Today. A Safer Tomorrow.
+            </div>
+
+        </div>
+
     </div>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/upload">Upload</a></li>
-    </ul>
+
+    <div class="fs-nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/upload"
+           class="fs-nav-active">
+            Upload
+        </a>
+
+        <a href="/">
+            How It Works
+        </a>
+
+        <a href="/">
+            About
+        </a>
+
+        <a href="/upload"
+           class="fs-nav-button">
+            🛡 Your Privacy Matters
+        </a>
+
+    </div>
 
 </nav>
 
-<section class="hero">
 
-    <div class="hero-badge">
-        🛡 AI-Powered Face Privacy Protection
-    </div>
 
-    <h1>Protect Your Digital Identity</h1>
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-    <p>
-        FaceShield AI intelligently protects facial identity while preserving a natural appearance using selective landmark transformation and AI-driven privacy enhancement.
-    </p>
+<section class="fs-hero">
 
-    <div class="hero-features">
+    <div class="fs-hero-content">
 
-        <span>⚡ Fast Processing</span>
-
-        <span>🛡 Local Processing</span>
-
-        <span>😊 Natural Appearance</span>
-
-    </div>
-
-</section>
-
-<div class="upload-container">
-
-    <form id="uploadForm"
-          action="/process"
-          method="POST"
-          enctype="multipart/form-data">
-
-        <div class="upload-card">
-
-            <label for="imageInput" class="upload-box">
-
-            <div class="upload-icon">
-    🖼️
-</div>
-
-<h2>Drop Your Image Here</h2>
-
-<p>
-    Drag & Drop or Click to Browse
-</p>
-
-                <input
-                    type="file"
-                    name="image"
-                    id="imageInput"
-                    accept=".jpg,.jpeg,.png"
-                    hidden
-                    required>
-
-                <img
-                    id="preview"
-                    src=""
-                    style="display:none;
-                           width:300px;
-                           margin-top:20px;
-                           border-radius:15px;">
-
-            </label>
-
-            <br>
-<div class="privacy-section">
-
-    <label for="privacy_mode">
-        <b>Select Privacy Level</b>
-    </label>
-
-    <br><br>
-
-    <select
-        name="privacy_mode"
-        id="privacy_mode"
-        class="privacy-select">
-    <option value="natural">
-🟢 Low Protection
-</option>
-
-<option value="balanced" selected>
-🟡 Medium Protection 
-</option>
-
-<option value="strong">
-🟠 High Protection
-</option>
-
-<option value="maximum">
-🔴 Maximum Protection
-</option>
-
-    </select>
-
-    <div class="privacy-card">
-
-        <h3>Privacy Experience</h3>
-
-        <div class="emoji-row">
-
-        <span>🟢</span>
-
-        <span>🟡</span>
-
-        <span>🟠</span>
-
-        <span>🔴</span>
-
+        <div class="fs-hero-small">
+            SECURE &nbsp;•&nbsp;
+            PRIVATE &nbsp;•&nbsp;
+            AI-POWERED
         </div>
 
-        <input
-            type="range"
-            id="privacySlider"
-            min="0"
-            max="3"
-            step="1"
-            value="1">
 
-        <div id="modeBadge" class="mode-badge balanced">
+        <h1>
+            Upload Your Image
+        </h1>
 
-            ⚖️ Balanced Protection
 
-        </div>
-
-        <p id="modeDescription">
-
-            Best balance between privacy and image quality.
-
+        <p>
+            Protect your identity with AI-powered facial privacy
+            technology while maintaining a natural appearance.
         </p>
 
-    </div>
-    <div class="recommend-card">
 
-    <h3>🤖 AI Recommendation</h3>
+        <div class="fs-hero-features">
 
-    <p>
+            <div class="fs-hero-feature">
 
-        <b>Recommended Mode: Medium Protection</b>
+                <div class="fs-feature-circle">
+                    ⚡
+                </div>
 
-        <br><br>
+                Fast Processing
 
-        Designed to deliver strong identity protection while maintaining a natural appearance. This mode is recommended for everyday use and offers the best balance between privacy and image quality.
+            </div>
 
-    </p>
 
-</div>
-</div>
+            <div class="fs-hero-feature">
 
-<button type="submit" class="upload-btn">
-    🛡 🛡 Generate Protected Image
-</button>
+                <div class="fs-feature-circle">
+                    🛡
+                </div>
 
-            <div id="loading"
-                 style="display:none;
-                        margin-top:25px;
-                        text-align:center;">
+                Local Processing
 
-                <h3>🔄 Protecting Face...</h3>
+            </div>
 
-                <p>Please wait while AI protects your identity.</p>
+
+            <div class="fs-hero-feature">
+
+                <div class="fs-feature-circle">
+                    🔒
+                </div>
+
+                Private Processing
 
             </div>
 
         </div>
 
-    </form>
+    </div>
+
+
+    <div class="fs-hero-visual">
+
+        <img
+            src="{{ url_for('static', filename='images/hero-face.png') }}"
+            class="fs-hero-image"
+            alt="FaceShield AI facial privacy"
+        >
+
+        <div class="fs-protection-label">
+            🔒 AI Protection
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<div class="fs-main">
+
+
+<form
+    id="uploadForm"
+    action="/process"
+    method="POST"
+    enctype="multipart/form-data"
+>
+
+
+<!-- =========================================================
+     STEP 1 - UPLOAD
+========================================================= -->
+
+<section class="fs-step">
+
+    <div class="fs-step-header">
+
+        <div class="fs-step-number">
+            1
+        </div>
+
+        <div class="fs-step-title">
+
+            <h2>
+                Upload Image
+            </h2>
+
+            <p>
+                Select an image containing a face to protect.
+            </p>
+
+        </div>
+
+        <div class="fs-file-info">
+            JPG, PNG, JPEG &nbsp;•&nbsp; Max 10 MB
+        </div>
+
+    </div>
+
+
+    <label
+        for="imageInput"
+        class="fs-upload-box"
+        id="uploadBox"
+    >
+
+        <div
+            class="fs-upload-icon"
+            id="uploadIcon"
+        >
+            ☁
+        </div>
+
+
+        <h3 id="uploadTitle">
+            Drag & Drop your image here
+        </h3>
+
+
+        <p id="uploadText">
+            or click to browse
+        </p>
+
+
+        <button
+            type="button"
+            class="fs-choose-button"
+            onclick="document.getElementById('imageInput').click();"
+        >
+            🖼 Choose Image
+        </button>
+
+
+        <input
+            type="file"
+            name="image"
+            id="imageInput"
+            accept=".jpg,.jpeg,.png"
+            hidden
+            required
+        >
+
+
+        <img
+            id="preview"
+            src=""
+            alt="Selected image"
+            style="display:none;"
+        >
+
+    </label>
+
+</section>
+
+
+
+<!-- =========================================================
+     STEP 2 - PRIVACY
+========================================================= -->
+
+<section class="fs-step">
+
+    <div class="fs-step-header">
+
+        <div class="fs-step-number">
+            2
+        </div>
+
+        <div class="fs-step-title">
+
+            <h2>
+                Select Privacy Level
+            </h2>
+
+            <p>
+                Choose the level of identity protection you need.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="fs-privacy-layout">
+
+
+        <!-- PRIVACY CONTROL -->
+
+        <div class="fs-privacy-panel">
+
+            <div class="fs-privacy-title">
+                Privacy Experience
+            </div>
+
+
+            <div class="fs-slider-area">
+
+                <input
+                    type="range"
+                    id="privacySlider"
+                    class="fs-slider"
+                    min="0"
+                    max="3"
+                    step="1"
+                    value="1"
+                >
+
+
+                <div class="fs-levels">
+
+
+                    <div class="fs-level">
+
+                        <div class="fs-level-dot fs-low"></div>
+
+                        Low
+
+                        <span>
+                            Light protection
+                        </span>
+
+                    </div>
+
+
+                    <div class="fs-level">
+
+                        <div class="fs-level-dot fs-medium"></div>
+
+                        Medium
+
+                        <span>
+                            Balanced protection
+                        </span>
+
+                    </div>
+
+
+                    <div class="fs-level">
+
+                        <div class="fs-level-dot fs-high"></div>
+
+                        High
+
+                        <span>
+                            Stronger protection
+                        </span>
+
+                    </div>
+
+
+                    <div class="fs-level">
+
+                        <div class="fs-level-dot fs-max"></div>
+
+                        Maximum
+
+                        <span>
+                            Highest protection
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <select
+                name="privacy_mode"
+                id="privacy_mode"
+                class="fs-select"
+            >
+
+                <option value="natural">
+                    🟢 Low Protection
+                </option>
+
+                <option value="balanced" selected>
+                    🟡 Medium Protection
+                </option>
+
+                <option value="strong">
+                    🟠 High Protection
+                </option>
+
+                <option value="maximum">
+                    🔴 Maximum Protection
+                </option>
+
+            </select>
+
+
+            <div
+                id="modeBadge"
+                class="fs-mode-badge"
+            >
+                🟡 Medium Protection
+            </div>
+
+
+            <p
+                id="modeDescription"
+                class="fs-mode-description"
+            >
+                Balanced protection designed to preserve
+                visual appearance while reducing identity exposure.
+            </p>
+
+        </div>
+
+
+
+        <!-- AI RECOMMENDATION -->
+
+        <div class="fs-recommendation">
+
+            <h3>
+                🤖 AI Recommendation
+            </h3>
+
+
+            <strong id="recommendationTitle">
+                Recommended Mode: Medium Protection
+            </strong>
+
+
+            <p id="recommendationText">
+                Designed to provide effective identity protection
+                while maintaining a natural appearance.
+                Medium Protection provides a balanced experience
+                for everyday image sharing.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     STEP 3 - GENERATE
+========================================================= -->
+
+<section class="fs-step">
+
+    <div class="fs-step-header">
+
+        <div class="fs-step-number">
+            3
+        </div>
+
+        <div class="fs-step-title">
+
+            <h2>
+                Generate Protected Image
+            </h2>
+
+            <p>
+                Apply the selected privacy protection to your image.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="fs-generate-content">
+
+        <button
+            type="submit"
+            class="fs-generate-button"
+        >
+            🛡 Generate Protected Image
+        </button>
+
+
+        <div class="fs-local-note">
+            🔒 Your original image remains unchanged during processing.
+        </div>
+
+    </div>
+
+
+    <div id="loading">
+
+        <h3>
+            🔄 Protecting Your Face...
+        </h3>
+
+        <p>
+            FaceShield AI is processing your image.
+            Please wait.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     STEP 4 - SEE THE DIFFERENCE
+========================================================= -->
+
+<section class="fs-step">
+
+    <div class="fs-step-header">
+
+        <div class="fs-step-number">
+            4
+        </div>
+
+
+        <div class="fs-step-title">
+
+            <h2>
+                See the Difference
+            </h2>
+
+            <p>
+                Example of how FaceShield AI protects facial identity.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TWO IMAGES SIDE BY SIDE -->
+
+    <div class="fs-example-row">
+
+
+        <!-- TRADITIONAL -->
+
+        <div class="fs-example-card">
+
+            <img
+                src="{{ url_for('static', filename='images/traditional-face.png') }}"
+                class="fs-example-image"
+                alt="Traditional facial privacy example"
+            >
+
+
+            <span class="fs-example-label">
+                Traditional Methods
+            </span>
+
+        </div>
+
+
+
+        <!-- FACESHIELD -->
+
+        <div class="fs-example-card">
+
+            <img
+                src="{{ url_for('static', filename='images/faceshield-face.png') }}"
+                class="fs-example-image"
+                alt="FaceShield AI protected example"
+            >
+
+
+            <span class="fs-example-label protected">
+                FaceShield AI
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- NOTE -->
+
+    <div class="fs-example-note">
+
+        <strong>
+            💡 Note
+        </strong>
+
+        The actual protection result depends on
+        the uploaded image and the selected privacy level.
+
+    </div>
+
+</section>
+
+
+</form>
+
+
+
+<!-- =========================================================
+     PRIVACY STRIP
+========================================================= -->
+
+<div class="fs-privacy-strip">
+
+    <div class="fs-privacy-left">
+
+        <div class="fs-lock">
+            🔒
+        </div>
+
+
+        <div>
+
+            <h3>
+                Your Privacy is Our Priority
+            </h3>
+
+
+            <p>
+                Your image is processed by the FaceShield AI application
+                and your original image remains unchanged.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="fs-private-badge">
+        🛡 Privacy Focused
+    </div>
 
 </div>
-<div class="feature-section">
 
-<div class="feature">
 
-⚡
 
-<h4>Fast</h4>
+<!-- =========================================================
+     BOTTOM FEATURES
+========================================================= -->
 
-<p>Average processing time under 2 seconds.</p>
+<div class="fs-bottom-features">
+
+
+    <div class="fs-bottom-feature">
+
+        <div class="fs-bottom-icon">
+            🌿
+        </div>
+
+        <h4>
+            Natural Appearance
+        </h4>
+
+        <p>
+            Preserves the overall visual appearance.
+        </p>
+
+    </div>
+
+
+
+    <div class="fs-bottom-feature">
+
+        <div class="fs-bottom-icon">
+            👥
+        </div>
+
+        <h4>
+            Identity Protection
+        </h4>
+
+        <p>
+            Focuses protection on identity-sensitive regions.
+        </p>
+
+    </div>
+
+
+
+    <div class="fs-bottom-feature">
+
+        <div class="fs-bottom-icon">
+            ⚡
+        </div>
+
+        <h4>
+            AI-Powered
+        </h4>
+
+        <p>
+            Uses your FaceShield AI protection pipeline.
+        </p>
+
+    </div>
+
+
+
+    <div class="fs-bottom-feature">
+
+        <div class="fs-bottom-icon">
+            🔐
+        </div>
+
+        <h4>
+            Privacy Focused
+        </h4>
+
+        <p>
+            Gives you control over the protection level.
+        </p>
+
+    </div>
 
 </div>
 
-<div class="feature">
-
-🛡
-
-<h4>Privacy Protection</h4>
-
-<p>Selective facial landmark transformation.</p>
 
 </div>
 
-<div class="feature">
 
-😊
 
-<h4>Natural Appearance</h4>
-
-<p>Preserves realistic visual quality.</p>
-
-</div>
-
-<div class="feature">
-
-📥
-
-<h4>Download Ready</h4>
-
-<p>Protected image available instantly.</p>
-
-</div>
-
-</div>
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script>
-   
-const input = document.getElementById("imageInput");
-const preview = document.getElementById("preview");
 
-// ------------------------
-// Image Preview
-// ------------------------
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const input =
+    document.getElementById("imageInput");
+
+const preview =
+    document.getElementById("preview");
+
+const uploadTitle =
+    document.getElementById("uploadTitle");
+
+const uploadText =
+    document.getElementById("uploadText");
+
+const uploadIcon =
+    document.getElementById("uploadIcon");
+
+const uploadBox =
+    document.getElementById("uploadBox");
+
+
+const slider =
+    document.getElementById("privacySlider");
+
+const dropdown =
+    document.getElementById("privacy_mode");
+
+const badge =
+    document.getElementById("modeBadge");
+
+const description =
+    document.getElementById("modeDescription");
+
+const recommendationTitle =
+    document.getElementById("recommendationTitle");
+
+const recommendationText =
+    document.getElementById("recommendationText");
+
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
 
 input.addEventListener("change", function () {
 
     if (this.files && this.files[0]) {
 
-        preview.src = URL.createObjectURL(this.files[0]);
-        preview.style.display = "block";
+        const file = this.files[0];
+
+
+        preview.src =
+            URL.createObjectURL(file);
+
+        preview.style.display =
+            "block";
+
+
+        uploadIcon.style.display =
+            "none";
+
+
+        uploadTitle.innerText =
+            file.name;
+
+
+        uploadText.innerText =
+            "Image selected successfully";
 
     }
 
 });
 
-// ------------------------
-// Loading Animation
-// ------------------------
 
-document.getElementById("uploadForm").addEventListener("submit", function () {
+/* =========================================================
+   DRAG AND DROP
+========================================================= */
 
-    document.getElementById("loading").style.display = "block";
+uploadBox.addEventListener(
+    "dragover",
+    function (event) {
 
-});
+        event.preventDefault();
 
-// ------------------------
-// Privacy Slider
-// ------------------------
+        uploadBox.style.borderColor =
+            "#087cff";
 
-const slider = document.getElementById("privacySlider");
-const dropdown = document.getElementById("privacy_mode");
-const badge = document.getElementById("modeBadge");
-const description = document.getElementById("modeDescription");
+        uploadBox.style.background =
+            "#f0f8ff";
+
+    }
+);
+
+
+uploadBox.addEventListener(
+    "dragleave",
+    function () {
+
+        uploadBox.style.borderColor =
+            "#67b7ff";
+
+        uploadBox.style.background =
+            "#fafdff";
+
+    }
+);
+
+
+uploadBox.addEventListener(
+    "drop",
+    function (event) {
+
+        event.preventDefault();
+
+
+        uploadBox.style.borderColor =
+            "#67b7ff";
+
+        uploadBox.style.background =
+            "#fafdff";
+
+
+        if (
+            event.dataTransfer.files.length > 0
+        ) {
+
+            input.files =
+                event.dataTransfer.files;
+
+            input.dispatchEvent(
+                new Event("change")
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PRIVACY MODES
+========================================================= */
+
 const modes = [
 
-{
-value:"natural",
-title:"🟢 Low Protection",
-desc:"Suitable when preserving natural appearance is the priority.",
-className:"natural"
-},
+    {
+        value: "natural",
 
-{
-value:"balanced",
-title:"🟡 Medium Protection",
-desc:"Recommended for most users.",
-className:"balanced"
-},
+        title: "🟢 Low Protection",
 
-{
-value:"strong",
-title:"🟠 High Protection",
-desc:"Provides stronger identity protection.",
-className:"strong"
-},
+        desc:
+            "Light protection with greater focus on preserving visual details.",
 
-{
-value:"maximum",
-title:"🔴 Maximum Protection",
-desc:"Highest available privacy protection.",
-className:"maximum"
-}
+        recommendation:
+            "Low Protection is suitable when preserving the natural appearance and image details is the main priority."
+    },
+
+
+    {
+        value: "balanced",
+
+        title: "🟡 Medium Protection",
+
+        desc:
+            "Balanced protection designed to preserve visual appearance while reducing identity exposure.",
+
+        recommendation:
+            "Medium Protection provides a balanced experience between identity protection and visual appearance."
+    },
+
+
+    {
+        value: "strong",
+
+        title: "🟠 High Protection",
+
+        desc:
+            "Stronger identity protection. Visual quality may slightly decrease due to increased protection.",
+
+        recommendation:
+            "High Protection applies stronger identity protection. Because the protection is increased, some reduction in visual quality may occur."
+    },
+
+
+    {
+        value: "maximum",
+
+        title: "🔴 Maximum Protection",
+
+        desc:
+            "Highest identity protection. Stronger transformations may reduce visual quality more noticeably.",
+
+        recommendation:
+            "Maximum Protection provides the strongest available protection level. The stronger transformation can result in a more noticeable reduction in visual quality."
+    }
 
 ];
-function updateMode(index){
 
-    dropdown.value = modes[index].value;
 
-    badge.innerHTML = modes[index].title;
+/* =========================================================
+   UPDATE PRIVACY MODE
+========================================================= */
 
-    description.innerHTML = modes[index].desc;
+function updateMode(index) {
 
-    badge.className = "mode-badge " + modes[index].className;
+    index = Number(index);
+
+
+    const mode =
+        modes[index];
+
+
+    dropdown.value =
+        mode.value;
+
+
+    badge.innerHTML =
+        mode.title;
+
+
+    description.innerHTML =
+        mode.desc;
+
+
+    recommendationTitle.innerText =
+        "Recommended Mode: " +
+        mode.title
+            .replace("🟢 ", "")
+            .replace("🟡 ", "")
+            .replace("🟠 ", "")
+            .replace("🔴 ", "");
+
+
+    recommendationText.innerText =
+        mode.recommendation;
 
 }
 
-// Slider → Dropdown
 
-slider.addEventListener("input", function(){
+/* =========================================================
+   SLIDER → DROPDOWN
+========================================================= */
 
-    updateMode(this.value);
+slider.addEventListener(
+    "input",
+    function () {
 
-});
+        updateMode(
+            this.value
+        );
 
-// Dropdown → Slider
+    }
+);
 
-dropdown.addEventListener("change", function(){
 
-    let index = modes.findIndex(
-        m => m.value === this.value
+/* =========================================================
+   DROPDOWN → SLIDER
+========================================================= */
+
+dropdown.addEventListener(
+    "change",
+    function () {
+
+        const index =
+            modes.findIndex(
+                mode =>
+                    mode.value ===
+                    this.value
+            );
+
+
+        slider.value =
+            index;
+
+
+        updateMode(index);
+
+    }
+);
+
+
+/* =========================================================
+   FORM SUBMIT
+========================================================= */
+
+document
+    .getElementById("uploadForm")
+    .addEventListener(
+        "submit",
+        function () {
+
+            document
+                .getElementById("loading")
+                .style.display =
+                "block";
+
+        }
     );
 
-    slider.value = index;
 
-    updateMode(index);
-
-});
-
-// Default
+/* =========================================================
+   DEFAULT MODE
+========================================================= */
 
 updateMode(1);
 
+
 </script>
+
 
 </body>
 

@@ -1148,3 +1148,494 @@ background:#2563eb;
 .status.high{
     background:#28a745;
 }
+/* =========================================================
+   FACESHIELD COMPARISON SECTION
+========================================================= */
+
+.comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+
+.comparison-card {
+    background: #f8fbff;
+    border: 1px solid #dce7f2;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(20, 65, 110, 0.06);
+}
+
+.comparison-preview {
+    height: 125px;
+    overflow: hidden;
+    background: #e8f0f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comparison-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform: scale(0.65);
+}
+
+.traditional-image {
+    filter: grayscale(1) blur(5px);
+}
+
+.protected-comparison-image {
+    filter: none;
+}
+
+.comparison-content {
+    padding: 16px 17px 18px;
+}
+
+.comparison-content h3 {
+    color: #132545;
+    font-size: 14px;
+    font-weight: 750;
+    margin-bottom: 11px;
+}
+
+.comparison-card:nth-child(2) .comparison-content h3 {
+    color: #0878ee;
+}
+
+.comparison-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comparison-content li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #657791;
+    font-size: 10px;
+    line-height: 1.4;
+    margin-bottom: 7px;
+}
+
+.comparison-content li:last-child {
+    margin-bottom: 0;
+}
+
+.cross,
+.check {
+    width: 15px;
+    height: 15px;
+    min-width: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.cross {
+    background: #e8edf3;
+    color: #7b899b;
+}
+
+.check {
+    background: #e5f5ff;
+    color: #0878ee;
+}
+
+/* =========================================================
+   TIGHTER PROFESSIONAL SECTION SPACING
+========================================================= */
+
+.section {
+    padding-top: 72px;
+    padding-bottom: 72px;
+}
+
+.why {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.use-cases {
+    padding-top: 68px;
+    padding-bottom: 68px;
+}
+
+.technology {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.use-case-grid {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.use-card {
+    background: #ffffff;
+    border: 1px solid #e1eaf3;
+    border-radius: 13px;
+    padding: 17px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    min-height: 92px;
+    box-shadow: 0 7px 20px rgba(20, 65, 110, 0.05);
+}
+
+.use-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    margin: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef6ff;
+    color: #0878ee;
+    font-size: 18px;
+}
+
+.use-card h3 {
+    font-size: 13px;
+    margin-bottom: 3px;
+    color: #122342;
+}
+
+.use-card p {
+    font-size: 10px;
+    line-height: 1.45;
+    color: #718099;
+}
+/* ===== FINAL COMPARISON IMAGE FIX ===== */
+
+.comparison-preview {
+    height: 125px !important;
+    overflow: hidden !important;
+    background: #e8f0f8 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.comparison-preview .comparison-image {
+    width: 75% !important;
+    height: auto !important;
+    max-width: 75% !important;
+    max-height: 110px !important;
+    object-fit: contain !important;
+    display: block !important;
+    transform: none !important;
+}
+
+.comparison-preview .traditional-image {
+    filter: grayscale(1) blur(5px) !important;
+}
+
+.comparison-preview .protected-comparison-image {
+    filter: none !important;
+}
+/* =========================================
+   STEP 4 - SEE THE DIFFERENCE
+========================================= */
+
+.difference-section {
+    width: 92%;
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 28px 32px;
+    background: #ffffff;
+    border: 1px solid #dce9f8;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(20, 70, 130, 0.06);
+
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: linear-gradient(135deg, #087cff, #19b5ff);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+
+    box-shadow: 0 6px 15px rgba(0, 126, 255, 0.25);
+}
+
+.difference-content {
+    width: 100%;
+}
+
+.difference-heading h2 {
+    margin: 0;
+    color: #102957;
+    font-size: 24px;
+}
+
+.difference-heading p {
+    margin: 5px 0 20px;
+    color: #6680a5;
+    font-size: 13px;
+}
+
+.difference-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.75fr;
+    gap: 18px;
+    align-items: center;
+}
+
+.difference-card {
+    position: relative;
+}
+
+.difference-image-wrapper {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid #d7e6f7;
+    background: #f4f8fd;
+}
+
+.fs-example-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.difference-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+
+    padding: 7px 12px;
+    border-radius: 8px;
+
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.traditional-label {
+    background: #102957;
+}
+
+.protected-label {
+    background: #087cff;
+}
+
+.difference-note {
+    padding: 20px;
+    background: #fff8e8;
+    border-radius: 14px;
+    border: 1px solid #f4dfaa;
+
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.note-icon {
+    font-size: 22px;
+}
+
+.difference-note strong {
+    color: #735300;
+    font-size: 14px;
+}
+
+.difference-note p {
+    margin: 7px 0 0;
+    color: #806d45;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* PC / smaller laptop */
+@media (max-width: 1000px) {
+
+    .difference-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .difference-note {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* Mobile */
+@media (max-width: 650px) {
+
+    .difference-section {
+        width: 88%;
+        padding: 22px;
+    }
+
+    .difference-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .difference-note {
+        grid-column: auto;
+    }
+
+    .difference-image-wrapper {
+        height: 210px;
+    }
+
+}
+/* =====================================================
+   STEP 4 - SEE THE DIFFERENCE
+   ===================================================== */
+
+.step-4 {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.difference-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.8fr;
+    gap: 24px;
+    align-items: stretch;
+    margin-top: 25px;
+}
+
+
+/* Image cards */
+
+.difference-card {
+    position: relative;
+    height: 220px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #eef5ff;
+    border: 1px solid #d9e7f8;
+    box-shadow: 0 8px 24px rgba(20, 70, 130, 0.08);
+}
+
+.difference-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* Labels */
+
+.difference-label {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+
+    padding: 9px 16px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: white;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+}
+
+.traditional-label {
+    background: #0b2a52;
+}
+
+.faceshield-label {
+    background: #087df5;
+}
+
+
+/* Note */
+
+.difference-note {
+    background: #fff6df;
+    border-radius: 14px;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border: 1px solid #f5e4b8;
+}
+
+.difference-note h3 {
+    margin: 0 0 12px 0;
+
+    font-size: 18px;
+    color: #182b49;
+}
+
+.difference-note p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.7;
+    color: #5d6675;
+}
+
+
+/* PC / laptop */
+
+@media (max-width: 1000px) {
+
+    .difference-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .difference-note {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* Smaller screens */
+
+@media (max-width: 650px) {
+
+    .difference-content {
+        grid-template-columns: 1fr;
+    }
+
+    .difference-note {
+        grid-column: auto;
+    }
+
+    .difference-card {
+        height: 220px;
+    }
+
+}

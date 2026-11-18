@@ -1,424 +1,1771 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FaceShield AI</title>
+    <title>FaceShield AI | Facial Privacy Protection</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f9ff;
+            color: #10264a;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            height: 64px;
+            padding: 0 6%;
+            background: #071a36;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .brand-name span {
+            color: #28c7f4;
+        }
+
+        .tagline {
+            font-size: 8px;
+            color: #91a8c8;
+            margin-top: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            color: #e9f2ff;
+            transition: .25s;
+        }
+
+        .nav-links a:hover {
+            color: #2cc9f5;
+        }
+
+        .nav-btn {
+            padding: 11px 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1678ff, #16c4e8);
+            color: white !important;
+            box-shadow: 0 8px 25px rgba(22, 137, 255, .35);
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 465px;
+            padding: 45px 7% 0;
+            background:
+                radial-gradient(circle at 78% 40%, rgba(18, 142, 255, .22), transparent 28%),
+                radial-gradient(circle at 60% 10%, rgba(26, 208, 241, .08), transparent 25%),
+                linear-gradient(110deg, #061b3b 0%, #0b2e62 50%, #075187 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 1px solid rgba(74, 203, 255, .12);
+            border-radius: 50%;
+            right: -220px;
+            top: -200px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(74, 203, 255, .08);
+            border-radius: 50%;
+            left: -270px;
+            bottom: -280px;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 46% 54%;
+            align-items: center;
+            min-height: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            padding-bottom: 35px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border: 1px solid rgba(48, 207, 246, .45);
+            border-radius: 30px;
+            background: rgba(20, 174, 222, .10);
+            color: #dffaff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            margin-bottom: 18px;
+        }
+
+        .hero-badge span {
+            width: 7px;
+            height: 7px;
+            background: #2bd4f3;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #2bd4f3;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 5vw, 67px);
+            line-height: .96;
+            letter-spacing: -3px;
+            margin-bottom: 20px;
+            font-weight: 850;
+        }
+
+        .hero h1 span {
+            color: #2dcaf4;
+        }
+
+        .hero-description {
+            max-width: 500px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #c8dcf7;
+            margin-bottom: 25px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            padding: 13px 21px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: .25s;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #147cff, #18c8e9);
+            box-shadow: 0 10px 25px rgba(19, 128, 255, .30);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            border: 1px solid rgba(255,255,255,.45);
+            color: white;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255,255,255,.08);
+        }
+
+        .hero-points {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-point {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 10px;
+            color: #d6e7fa;
+        }
+
+        .hero-point span {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #087fd9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           HERO VISUAL
+        ===================================================== */
+
+        .hero-visual {
+            height: 390px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .face-frame {
+            width: 400px;
+            height: 390px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(70, 204, 255, .40);
+            box-shadow:
+                0 0 60px rgba(15, 174, 255, .12),
+                inset 0 0 40px rgba(0,0,0,.18);
+            background: #0b315e;
+        }
+
+        .face-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .protected-overlay {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background:
+                radial-gradient(circle, rgba(54, 211, 255, .55) 1.5px, transparent 1.8px);
+            background-size: 12px 12px;
+            background-color: rgba(0, 145, 214, .16);
+            mix-blend-mode: screen;
+        }
+
+        .split-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: white;
+            box-shadow: 0 0 14px #6deaff;
+            transform: translateX(-50%);
+        }
+
+        .split-button {
+            position: absolute;
+            left: 50%;
+            top: 52%;
+            transform: translate(-50%, -50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #081f42;
+            border: 2px solid white;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            z-index: 4;
+        }
+
+        .face-label {
+            position: absolute;
+            top: 18px;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            z-index: 4;
+        }
+
+        .original-label {
+            left: 20px;
+            background: rgba(5, 29, 59, .78);
+            border: 1px solid rgba(255,255,255,.35);
+        }
+
+        .protected-label {
+            right: 17px;
+            background: #118be5;
+            border: 1px solid #5adfff;
+        }
+
+        .analysis-card {
+            position: absolute;
+            right: -40px;
+            top: 86px;
+            width: 195px;
+            padding: 17px;
+            background: rgba(4, 28, 57, .94);
+            border: 1px solid rgba(54, 201, 255, .35);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,.22);
+            z-index: 5;
+        }
+
+        .analysis-title {
+            color: #35d2f3;
+            font-weight: 800;
+            font-size: 12px;
+            margin-bottom: 13px;
+        }
+
+        .analysis-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: #d9eaff;
+            font-size: 9px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .analysis-item span {
+            width: 14px;
+            height: 14px;
+            min-width: 14px;
+            border-radius: 50%;
+            background: #21d6a1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+        }
+
+        .identity-box {
+            margin-top: 13px;
+            padding: 11px;
+            border-radius: 10px;
+            background: rgba(22, 183, 229, .14);
+            border: 1px solid rgba(48, 205, 244, .25);
+        }
+
+        .identity-box strong {
+            color: #35d2f3;
+            font-size: 10px;
+            display: block;
+        }
+
+        .identity-box small {
+            color: #b9cee6;
+            font-size: 8px;
+        }
+
+        .share-text {
+            position: absolute;
+            right: -25px;
+            bottom: 38px;
+            color: #55d6f5;
+            font-size: 13px;
+            font-style: italic;
+            font-weight: 700;
+            transform: rotate(-5deg);
+        }
+
+        /* =====================================================
+           FEATURE CARDS
+        ===================================================== */
+
+        .feature-wrapper {
+            position: relative;
+            z-index: 5;
+            margin-top: -1px;
+        }
+
+        .feature-grid {
+            max-width: 1100px;
+            margin: -32px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #e2ebf5;
+            border-radius: 15px;
+            padding: 21px 17px;
+            min-height: 137px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(19, 58, 103, .10);
+        }
+
+        .feature-icon {
+            width: 43px;
+            height: 43px;
+            margin: 0 auto 12px;
+            border-radius: 11px;
+            background: #edf7ff;
+            color: #087cf1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .feature-card h3 {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .feature-card p {
+            font-size: 9.5px;
+            color: #71819b;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           COMMON SECTION
+        ===================================================== */
+
+        .section {
+            padding: 75px 6%;
+        }
+
+        .section-label {
+            color: #087df0;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            letter-spacing: -1.2px;
+            margin-bottom: 9px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #70809b;
+            font-size: 13px;
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           HOW IT WORKS
+        ===================================================== */
+
+        .how-section {
+            background: #f5f9ff;
+            padding-top: 65px;
+            padding-bottom: 75px;
+        }
+
+        .steps {
+            max-width: 1050px;
+            margin: 48px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 45px;
+            position: relative;
+        }
+
+        .steps::before {
+            content: "";
+            position: absolute;
+            left: 10%;
+            right: 10%;
+            top: 45px;
+            border-top: 2px dashed #b8d8fa;
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 90px;
+            height: 90px;
+            margin: auto;
+            border-radius: 50%;
+            background: #f7fbff;
+            border: 1px solid #cde5ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            color: #087df0;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(29, 114, 200, .08);
+        }
+
+        .step-number {
+            position: absolute;
+            right: -2px;
+            top: -5px;
+            width: 28px;
+            height: 28px;
+            background: #087df0;
+            color: white;
+            border-radius: 50%;
+            font-size: 9px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step h3 {
+            margin-top: 14px;
+            font-size: 14px;
+        }
+
+        .step p {
+            margin-top: 6px;
+            color: #71819a;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           WHY FACESHIELD
+        ===================================================== */
+
+        .why-section {
+            padding: 70px 6%;
+            background: white;
+        }
+
+        .why-container {
+            max-width: 1120px;
+            margin: auto;
+            padding: 35px;
+            border-radius: 17px;
+            background: linear-gradient(120deg, #eaf7ff, #f3f9ff);
+            display: grid;
+            grid-template-columns: 42% 58%;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .why-label {
+            color: #087df0;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .why-content h2 {
+            font-size: 31px;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .why-content p {
+            color: #607593;
+            font-size: 12px;
+            line-height: 1.65;
+            max-width: 460px;
+        }
+
+        .check-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 10px;
+            color: #536983;
+            margin-bottom: 9px;
+        }
+
+        .check-list span {
+            width: 17px;
+            height: 17px;
+            background: #dff2ff;
+            color: #087df0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13px;
+        }
+
+        .comparison-card {
+            background: rgba(255,255,255,.88);
+            border: 1px solid #dce8f4;
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .comparison-preview {
+            height: 125px;
+            overflow: hidden;
+            background: #e8f0f8;
+        }
+
+        .comparison-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .traditional-image {
+            filter: grayscale(1) blur(7px);
+            transform: scale(1.08);
+        }
+
+        .protected-comparison-image {
+            filter: none;
+        }
+
+        .comparison-content {
+            padding: 13px;
+        }
+
+        .comparison-content h3 {
+            font-size: 12px;
+            margin-bottom: 9px;
+        }
+
+        .comparison-card:nth-child(2) h3 {
+            color: #087df0;
+        }
+
+        .comparison-content ul {
+            list-style: none;
+        }
+
+        .comparison-content li {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            font-size: 8.5px;
+            color: #687c97;
+            margin-bottom: 6px;
+        }
+
+        .cross,
+        .check {
+            width: 14px;
+            height: 14px;
+            min-width: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .cross {
+            background: #e9eef4;
+            color: #7b899a;
+        }
+
+        .check {
+            background: #dff3ff;
+            color: #087df0;
+        }
+
+        /* =====================================================
+           USE CASES
+        ===================================================== */
+
+        .use-section {
+            padding: 70px 6%;
+            background: #f5f9ff;
+        }
+
+        .use-grid {
+            max-width: 1120px;
+            margin: 38px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .use-card {
+            background: white;
+            border: 1px solid #e0eaf4;
+            border-radius: 13px;
+            padding: 17px;
+            min-height: 105px;
+            display: flex;
+            gap: 11px;
+            box-shadow: 0 8px 22px rgba(26, 74, 120, .04);
+        }
+
+        .use-icon {
+            width: 39px;
+            height: 39px;
+            min-width: 39px;
+            border-radius: 10px;
+            background: #edf6ff;
+            color: #087df0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .use-card h3 {
+            font-size: 11px;
+            margin-bottom: 5px;
+            color: #142a4c;
+        }
+
+        .use-card p {
+            font-size: 8.5px;
+            line-height: 1.5;
+            color: #72829b;
+        }
+
+        /* =====================================================
+           TECHNOLOGY
+        ===================================================== */
+
+        .technology-section {
+            padding: 70px 6%;
+            background: white;
+            text-align: center;
+        }
+
+        .technology-pills {
+            max-width: 800px;
+            margin: 30px auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 9px;
+        }
+
+        .tech-pill {
+            padding: 9px 16px;
+            border-radius: 25px;
+            background: #f7fbff;
+            border: 1px solid #dbe8f5;
+            color: #506783;
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta-section {
+            padding: 25px 6% 65px;
+            background: white;
+        }
+
+        .cta {
+            max-width: 1120px;
+            min-height: 150px;
+            margin: auto;
+            border-radius: 17px;
+            padding: 30px 38px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(26, 168, 255, .25), transparent 25%),
+                linear-gradient(110deg, #061b3b, #08447d);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(79, 207, 255, .12);
+            border-radius: 50%;
+            right: -80px;
+            top: -150px;
+        }
+
+        .cta-label {
+            color: #39d5f5;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .cta h2 {
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .cta p {
+            font-size: 11px;
+            color: #b9cee6;
+        }
+
+        .cta-btn {
+            background: white;
+            color: #087df0;
+            padding: 13px 21px;
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            background: #06172f;
+            color: white;
+            padding: 38px 6% 28px;
+        }
+
+        .footer-inner {
+            max-width: 1120px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-brand {
+            color: white;
+            font-size: 19px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .footer-brand span {
+            color: #2ccaf2;
+        }
+
+        .footer-description {
+            max-width: 270px;
+            color: #8095b2;
+            font-size: 9px;
+            line-height: 1.6;
+        }
+
+        .footer h4 {
+            font-size: 10px;
+            margin-bottom: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #8195b0;
+            font-size: 9px;
+        }
+
+        .footer-links a:hover {
+            color: #2ccaf2;
+        }
+
+        .copyright {
+            max-width: 1120px;
+            margin: 28px auto 0;
+            padding-top: 17px;
+            border-top: 1px solid rgba(255,255,255,.08);
+            text-align: right;
+            color: #647995;
+            font-size: 8px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                gap: 14px;
+                font-size: 10px;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons,
+            .hero-points {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                margin-top: 10px;
+            }
+
+            .analysis-card,
+            .share-text {
+                display: none;
+            }
+
+            .feature-grid,
+            .use-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-container {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links a:not(.nav-btn) {
+                display: none;
+            }
+
+            .hero {
+                padding: 35px 20px 0;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .face-frame {
+                width: 320px;
+                height: 330px;
+            }
+
+            .feature-grid,
+            .use-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .steps::before {
+                display: none;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 22px;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .copyright {
+                text-align: left;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
 
-<nav>
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
-    <div class="logo">
-        FaceShield AI
+<nav class="navbar">
+
+    <div class="brand">
+        <div class="brand-name">
+            FaceShield <span>AI</span>
+        </div>
+
+        <div class="tagline">
+            Privacy Today. A Safer Tomorrow.
+        </div>
     </div>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/upload">Protect Image</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
-    </ul>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#use-cases">Use Cases</a>
+        <a href="#about">About</a>
+
+        <a href="{{ url_for('upload_page') }}" class="nav-btn">
+            🛡 Protect Image →
+        </a>
+    </div>
 
 </nav>
 
-<section class="hero">
 
-    <h1>
-        Protect Your Identity with AI
-    </h1>
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-    <p>
-        FaceShield AI uses Artificial Intelligence, MediaPipe and
-        InsightFace to protect your identity while preserving
-        the natural appearance of your photos.
+<section class="hero" id="home">
+
+    <div class="hero-inner">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                <span></span>
+                AI-POWERED FACIAL PRIVACY
+            </div>
+
+            <h1>
+                Same Face.<br>
+                <span>Safer Future.</span>
+            </h1>
+
+            <p class="hero-description">
+                Intelligently protect identity-sensitive facial regions
+                while preserving the natural appearance, quality and
+                usability of your image.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('upload_page') }}" class="primary-btn">
+                    ↑ Start Protecting →
+                </a>
+
+                <a href="#how-it-works" class="secondary-btn">
+                    ▶ See How It Works
+                </a>
+
+            </div>
+
+            <div class="hero-points">
+
+                <div class="hero-point">
+                    <span>✓</span>
+                    Your identity, your control
+                </div>
+
+                <div class="hero-point">
+                    <span>✓</span>
+                    Natural look preserved
+                </div>
+
+                <div class="hero-point">
+                    <span>✓</span>
+                    Safe for sharing
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual">
+
+            <div class="face-frame">
+
+                <img
+                    src="{{ url_for('static', filename='images/hero-face.png') }}"
+                    alt="FaceShield AI facial privacy demonstration"
+                    class="face-image"
+                >
+
+                <div class="protected-overlay"></div>
+
+                <div class="split-line"></div>
+
+                <div class="split-button">
+                    ↔
+                </div>
+
+        
+            </div>
+
+
+            <div class="analysis-card">
+
+                <div class="analysis-title">
+                    ◈ &nbsp; AI ANALYSIS
+                </div>
+
+                <div class="analysis-item">
+                    <span>✓</span>
+                    Face detected
+                </div>
+
+                <div class="analysis-item">
+                    <span>✓</span>
+                    Identity-sensitive regions identified
+                </div>
+
+                <div class="analysis-item">
+                    <span>✓</span>
+                    Selective protection applied
+                </div>
+
+                <div class="analysis-item">
+                    <span>✓</span>
+                    Image quality preserved
+                </div>
+
+                <div class="identity-box">
+                    <strong>✓ &nbsp; Your Identity</strong>
+                    <small>Stays Protected</small>
+                </div>
+
+            </div>
+
+            <div class="share-text">
+                Share<br>
+                Confidently
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURE CARDS
+========================================================= -->
+
+<section class="feature-wrapper" id="features">
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">◎</div>
+
+            <h3>Accurate Detection</h3>
+
+            <p>
+                Detects faces and important facial regions
+                using AI-based vision.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">♢</div>
+
+            <h3>Selective Protection</h3>
+
+            <p>
+                Protects identity-sensitive areas instead
+                of hiding the entire face.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">▧</div>
+
+            <h3>Natural Image Quality</h3>
+
+            <p>
+                Preserves the overall appearance and
+                usability of your image.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">▥</div>
+
+            <h3>Measurable Privacy</h3>
+
+            <p>
+                Evaluates protection effectiveness using
+                a privacy score.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="how-section section" id="how-it-works">
+
+    <div class="section-label">
+        HOW IT WORKS
+    </div>
+
+    <h2 class="section-title">
+        From Image to Privacy
+    </h2>
+
+    <p class="section-subtitle">
+        A simple workflow for effective face privacy protection.
     </p>
 
-    <a href="/upload">
-        <button>
-            🚀 Start Protecting
-        </button>
-    </a>
-
-</section>
-
-<section class="features" id="features">
-
-    <div class="card">
-        <h2>🤖 AI Face Detection</h2>
-
-        <p>
-            Detects facial landmarks with high accuracy using
-            advanced AI models.
-        </p>
-    </div>
-
-    <div class="card">
-        <h2>🛡 Identity Suppression</h2>
-
-        <p>
-            Protects sensitive facial regions while keeping
-            your image natural.
-        </p>
-    </div>
-
-    <div class="card">
-        <h2>📊 Privacy Analysis</h2>
-
-        <p>
-            Generates Privacy Score, Similarity Score and
-            AI-based Protection Report.
-        </p>
-    </div>
-
-</section>
-
-<section class="how-it-works">
-
-    <h2>How FaceShield AI Works</h2>
 
     <div class="steps">
 
         <div class="step">
-            <div class="icon">📤</div>
-            <h3>Upload Image</h3>
-            <p>Select any facial image from your device.</p>
+
+            <div class="step-circle">
+                ↑
+                <div class="step-number">01</div>
+            </div>
+
+            <h3>Upload</h3>
+
+            <p>
+                Choose an image<br>
+                from your device.
+            </p>
+
         </div>
 
-        <div class="step">
-            <div class="icon">🧠</div>
-            <h3>AI Analysis</h3>
-            <p>MediaPipe detects facial landmarks and identifies sensitive regions.</p>
-        </div>
 
         <div class="step">
-            <div class="icon">🛡️</div>
-            <h3>Identity Protection</h3>
-            <p>Eyes, nose and mouth are selectively protected while preserving image quality.</p>
+
+            <div class="step-circle">
+                ⌕
+                <div class="step-number">02</div>
+            </div>
+
+            <h3>Analyze</h3>
+
+            <p>
+                Detect face and<br>
+                identify key regions.
+            </p>
+
         </div>
 
+
         <div class="step">
-            <div class="icon">📊</div>
-            <h3>Privacy Score</h3>
-            <p>The system calculates the similarity and privacy score instantly.</p>
+
+            <div class="step-circle">
+                ⚙
+                <div class="step-number">03</div>
+            </div>
+
+            <h3>Protect</h3>
+
+            <p>
+                Apply AI-based protection<br>
+                to sensitive regions.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-circle">
+                ✓
+                <div class="step-number">04</div>
+            </div>
+
+            <h3>Get Results</h3>
+
+            <p>
+                View and download your<br>
+                protected image.
+            </p>
+
         </div>
 
     </div>
 
 </section>
 
-<section class="hero" id="about">
 
-    <h1>Why FaceShield AI?</h1>
+<!-- =========================================================
+     WHY FACESHIELD
+========================================================= -->
 
-    <p>
+<section class="why-section" id="about">
 
-        Traditional blur and pixelation destroy image quality.
+    <div class="why-container">
 
-        FaceShield AI intelligently protects your identity while
-        maintaining a realistic appearance using landmark-based
-        suppression powered by Artificial Intelligence.
+        <div class="why-content">
 
-    </p>
+            <div class="why-label">
+                WHY FACESHIELD AI?
+            </div>
+
+            <h2>
+                Protect What Matters
+            </h2>
+
+            <p>
+                Instead of simply hiding the entire face, FaceShield AI
+                focuses protection on identity-sensitive facial information
+                while keeping the image natural and meaningful.
+            </p>
+
+            <ul class="check-list">
+
+                <li>
+                    <span>✓</span>
+                    Maintains natural appearance
+                </li>
+
+                <li>
+                    <span>✓</span>
+                    Provides selective facial protection
+                </li>
+
+                <li>
+                    <span>✓</span>
+                    Preserves important image details
+                </li>
+
+                <li>
+                    <span>✓</span>
+                    Provides measurable privacy evaluation
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="comparison">
+
+            <!-- Traditional -->
+
+            <div class="comparison-card">
+
+                <div class="comparison-preview">
+
+                    <img
+    src="{{ url_for('static', filename='images/traditional-face.png') }}"
+    alt="Traditional face protection"
+    class="comparison-image"
+>
+
+                </div>
+
+                <div class="comparison-content">
+
+                    <h3>
+                        Traditional Methods
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            <span class="cross">×</span>
+                            Blur or pixelation
+                        </li>
+
+                        <li>
+                            <span class="cross">×</span>
+                            Loss of image quality
+                        </li>
+
+                        <li>
+                            <span class="cross">×</span>
+                            Hides important facial details
+                        </li>
+
+                        <li>
+                            <span class="cross">×</span>
+                            Limited control
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- FaceShield -->
+
+            <div class="comparison-card">
+
+                <div class="comparison-preview">
+
+                    <img
+    src="{{ url_for('static', filename='images/faceshield-face.png') }}"
+    alt="FaceShield AI protection"
+    class="comparison-image"
+>
+
+                </div>
+
+                <div class="comparison-content">
+
+                    <h3>
+                        FaceShield AI
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            <span class="check">✓</span>
+                            Selective facial protection
+                        </li>
+
+                        <li>
+                            <span class="check">✓</span>
+                            Preserves natural appearance
+                        </li>
+
+                        <li>
+                            <span class="check">✓</span>
+                            Keeps image useful
+                        </li>
+
+                        <li>
+                            <span class="check">✓</span>
+                            Privacy evaluation
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<footer>
 
-    <h3>FaceShield AI</h3>
+<!-- =========================================================
+     USE CASES
+========================================================= -->
 
-    <p>
+<section class="use-section" id="use-cases">
 
-        AI Powered Face Privacy Protection System
+    <div class="section-label">
+        REAL-WORLD USE CASES
+    </div>
 
+    <h2 class="section-title">
+        Designed for a More Private Digital World
+    </h2>
+
+    <p class="section-subtitle">
+        Facial privacy can matter wherever images are captured,
+        shared or stored.
     </p>
 
-    <br>
 
-    <p>
+    <div class="use-grid">
 
-        © 2026 FaceShield AI | Built using Flask, OpenCV,
-        MediaPipe & InsightFace
+        <div class="use-card">
 
-    </p>
+            <div class="use-icon">
+                ↗
+            </div>
 
-</footer>
+            <div>
+                <h3>Social Sharing</h3>
 
-</body>
+                <p>
+                    Share your moments online with greater
+                    control over facial identity exposure.
+                </p>
+            </div>
 
-</html>
-```
-.how-it-works{
-
-    padding:80px;
-
-    background:white;
-
-    text-align:center;
-
-}
-
-.how-it-works h2{
-
-    font-size:42px;
-
-    margin-bottom:60px;
-
-}
-
-.steps{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:35px;
-
-    flex-wrap:wrap;
-
-}
-
-.step{
-
-    width:260px;
-
-    background:#f8fafc;
-
-    padding:35px;
-
-    border-radius:20px;
-
-    transition:.3s;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-}
-
-.step:hover{
-
-    transform:translateY(-10px);
-
-}
-
-.icon{
-
-    font-size:60px;
-
-    margin-bottom:20px;
-
-}
-
-<section class="technology">
-
-    <h2>Technologies Used</h2>
-
-    <div class="tech-grid">
-
-        <div class="tech-card">
-            <h3>🐍 Python</h3>
-            <p>Backend application development</p>
         </div>
 
-        <div class="tech-card">
-            <h3>📷 OpenCV</h3>
-            <p>Image processing and manipulation</p>
+
+        <div class="use-card">
+
+            <div class="use-icon">
+                ◉
+            </div>
+
+            <div>
+                <h3>Public Photography</h3>
+
+                <p>
+                    Reduce identity exposure in photographs
+                    captured and shared in public spaces.
+                </p>
+            </div>
+
         </div>
 
-        <div class="tech-card">
-            <h3>🙂 MediaPipe</h3>
-            <p>Face landmark detection</p>
+
+        <div class="use-card">
+
+            <div class="use-icon">
+                ▤
+            </div>
+
+            <div>
+                <h3>Research & Datasets</h3>
+
+                <p>
+                    Protect facial identity when preparing
+                    images for research and datasets.
+                </p>
+            </div>
+
         </div>
 
-        <div class="tech-card">
-            <h3>🧠 InsightFace</h3>
-            <p>Face similarity comparison</p>
-        </div>
 
-        <div class="tech-card">
-            <h3>⚡ Flask</h3>
-            <p>Web application framework</p>
-        </div>
+        <div class="use-card">
 
-        <div class="tech-card">
-            <h3>🎨 HTML • CSS • JavaScript</h3>
-            <p>Modern responsive interface</p>
+            <div class="use-icon">
+                ▣
+            </div>
+
+            <div>
+                <h3>Professional Use</h3>
+
+                <p>
+                    Support privacy-aware image handling for
+                    media, organizations and digital workflows.
+                </p>
+            </div>
+
         </div>
 
     </div>
 
 </section>
 
-<section class="stats">
 
-    <h2>Project Performance</h2>
+<!-- =========================================================
+     TECHNOLOGY
+========================================================= -->
 
-    <div class="stats-grid">
+<section class="technology-section">
 
-        <div class="stat-card">
-            <h1>99.7%</h1>
-            <p>Detection Accuracy</p>
-        </div>
+    <div class="section-label">
+        TECHNOLOGY
+    </div>
 
-        <div class="stat-card">
-            <h1>&lt;2 sec</h1>
-            <p>Average Processing Time</p>
-        </div>
+    <h2 class="section-title">
+        Built With AI & Computer Vision
+    </h2>
 
-        <div class="stat-card">
-            <h1>19</h1>
-            <p>Landmarks Protected</p>
-        </div>
+    <p class="section-subtitle">
+        Technologies used throughout the FaceShield AI pipeline.
+    </p>
 
-        <div class="stat-card">
-            <h1>100%</h1>
-            <p>Privacy Preservation</p>
-        </div>
+
+    <div class="technology-pills">
+
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Flask</span>
+        <span class="tech-pill">OpenCV</span>
+        <span class="tech-pill">MediaPipe Face Landmarker</span>
+        <span class="tech-pill">InsightFace</span>
+        <span class="tech-pill">Face Embeddings</span>
+        <span class="tech-pill">Cosine Similarity</span>
+        <span class="tech-pill">Privacy Evaluation</span>
 
     </div>
 
 </section>
-<section class="about">
 
-    <div class="about-left">
 
-        <h2>About FaceShield AI</h2>
+<!-- =========================================================
+     CTA
+========================================================= -->
 
-        <p>
+<section class="cta-section">
 
-            FaceShield AI is an Artificial Intelligence-based Face Privacy
-            Protection System designed to safeguard facial identity while
-            preserving the natural appearance of images.
+    <div class="cta">
 
-        </p>
+        <div>
 
-        <p>
+            <div class="cta-label">
+                TAKE CONTROL OF YOUR DIGITAL PRESENCE
+            </div>
 
-            The system combines MediaPipe Face Landmarker, OpenCV and
-            InsightFace to detect facial landmarks, selectively protect
-            identity-sensitive regions, and evaluate privacy using
-            facial similarity analysis.
+            <h2>
+                Start Protecting Your Images Today
+            </h2>
 
-        </p>
+            <p>
+                Experience AI-powered facial privacy in just a few clicks.
+            </p>
 
-        <a href="/upload">
+        </div>
 
-            <button class="about-btn">
 
-                Protect Your Image
-
-            </button>
-
+        <a href="{{ url_for('upload_page') }}" class="cta-btn">
+            ↑ Protect Image Now →
         </a>
 
     </div>
 
-    <div class="about-right">
+</section>
 
-        <div class="about-box">
 
-            <h3>🛡 Smart Privacy</h3>
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
-            <p>
-                AI intelligently protects facial identity without hiding the entire face.
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+
+            <div class="footer-brand">
+                FaceShield <span>AI</span>
+            </div>
+
+            <p class="footer-description">
+                AI-powered facial privacy protection designed to help
+                people share images with greater control over their
+                visual identity.
             </p>
 
         </div>
 
-        <div class="about-box">
 
-            <h3>⚡ Fast Processing</h3>
+        <div>
 
-            <p>
-                Image protection is completed within seconds using optimized AI models.
-            </p>
+            <h4>Explore</h4>
 
-        </div>
+            <div class="footer-links">
 
-        <div class="about-box">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#use-cases">Use Cases</a>
 
-            <h3>📊 Privacy Analysis</h3>
-
-            <p>
-                Calculates similarity score and privacy percentage automatically.
-            </p>
+            </div>
 
         </div>
 
-        <div class="about-box">
 
-            <h3>🔒 Secure Protection</h3>
+        <div>
 
-            <p>
-                Protects sensitive facial landmarks while maintaining image quality.
-            </p>
+            <h4>FaceShield AI</h4>
+
+            <div class="footer-links">
+
+                <a href="{{ url_for('upload_page') }}">
+                    Protect an Image
+                </a>
+
+                <a href="#about">
+                    About the Project
+                </a>
+
+                <a href="#features">
+                    Privacy Features
+                </a>
+
+            </div>
 
         </div>
 
     </div>
 
-</section>
 
-.technology{
+    <div class="copyright">
+        © 2026 FaceShield AI. All rights reserved.
+    </div>
 
-    padding:80px;
+</footer>
 
-    background:#f5f7fb;
-
-    text-align:center;
-
-}
-
-.technology h2{
-
-    font-size:42px;
-
-    margin-bottom:50px;
-
-}
-
-.tech-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-    gap:30px;
-
-}
-
-.tech-card{
-
-    background:white;
-
-    padding:30px;
-
-    border-radius:18px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.tech-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.tech-card h3{
-
-    color:#2563eb;
-
-    margin-bottom:15px;
-
-}
+</body>
+</html>
